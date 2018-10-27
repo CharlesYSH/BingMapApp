@@ -20,31 +20,30 @@ function handleArgs(id, e) {
 }
 
 
-/*
-function searchroute(){
+
+function searchRouteCode(loc1, loc2, lat1,log1,lat2,log2){
+	//var directionsManager;
 	Microsoft.Maps.loadModule('Microsoft.Maps.Directions', function () {
-		var directionsManager = new Microsoft.Maps.Directions.DirectionsManager(map);
-		// Set Route Mode to driving
-		directionsManager.setRequestOptions({ routeMode: Microsoft.Maps.Directions.RouteMode.driving });
-		var waypoint1 = new Microsoft.Maps.Directions.Waypoint({ address: '新竹'});
-		var waypoint2 = new Microsoft.Maps.Directions.Waypoint({ address: '台中'});
-		var waypoint3 = new Microsoft.Maps.Directions.Waypoint({ address: '台南'});
-		directionsManager.addWaypoint(waypoint1);
-		directionsManager.addWaypoint(waypoint2);
-		directionsManager.addWaypoint(waypoint3);
-		// Set the element in which the itinerary will be rendered
-		//directionsManager.setRenderOptions({ itineraryContainer: document.getElementById('printoutPanel') });
-		directionsManager.calculateDirections();
+	    var directionsManager = new Microsoft.Maps.Directions.DirectionsManager(map);
+	    // Set Route Mode to driving
+	    directionsManager.setRequestOptions({ routeMode: Microsoft.Maps.Directions.RouteMode.walking });
+	    var waypoint1 = new Microsoft.Maps.Directions.Waypoint({ address:loc1, location: new Microsoft.Maps.Location(lat1, log1) });
+	    var waypoint2 = new Microsoft.Maps.Directions.Waypoint({ address:loc2, location: new Microsoft.Maps.Location(lat2, log2) });
+	    directionsManager.addWaypoint(waypoint1);
+	    directionsManager.addWaypoint(waypoint2);
+	    // Set the element in which the itinerary will be rendered
+	    directionsManager.setRenderOptions({ itineraryContainer: document.getElementById('printoutPanel') });
+	    directionsManager.calculateDirections();
 	});
+	//return directionsManager;
 }
 
-function clearRoute(){
+
+function clearRoute(directionsManager){
 	Microsoft.Maps.loadModule('Microsoft.Maps.Directions', function () {
-		var directionsManager = new Microsoft.Maps.Directions.DirectionsManager(map);
 		directionsManager.clearAll();
-		directionsManager.calculateDirections();
 	});
-}*/
+}
 
 function pushPinCenter(){
 	var pushpin = new Microsoft.Maps.Pushpin(map.getCenter(), { color: 'red' });

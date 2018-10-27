@@ -76,8 +76,8 @@ def profile():
 def trip():
 #    if not session.get('username'):
 #        return redirect(url_for('hello'))
-    path = pg.path_Generation()
-    return render_template('trip.html', geocode=path ,form=Form)
+    path,address = pg.path_Generation()
+    return render_template('trip.html', geocode=path, address=address,form=Form)
     
 @app.route('/logout')
 def logout():

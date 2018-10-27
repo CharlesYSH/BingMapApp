@@ -41,19 +41,63 @@
 		
 		
 		#popView{
-			height: 90vh;
-			width: 375px;
-			border-radius:0 10px 0 0;
+			height: 80vh;
+			width: 380px;
+			border-radius:0px 10px 0 0;
 			background-color: rgba(0, 0, 0, 0.6);
 			bottom: 0px;
 			position:absolute;
 			z-index:2;
-			left:-390px;
+			left:0px;
 			text-align: center;
 			color: #FFFFFF;
 			text-align:center; 
 		}
+
+		@media (max-width: 380px) {
+		#popView{
+			height: 75vh;
+			width: 100%;
+			border-radius:10px 10px 0 0;
+			background-color: rgba(0, 0, 0, 0.6);
+			bottom: 0px;
+			position:absolute;
+			z-index:2;
+			left:0px;
+			text-align: center;
+			color: #FFFFFF;
+			text-align:center;
+			}
+		#popView2{
+			height: 40vh;
+			width: 100%;
+			border-radius:10px 10px 0 0;
+			background-color: rgba(255, 255, 255, 0.6);
+			bottom: 0px;
+			position:absolute;
+			z-index:2;
+			left:0px;
+			text-align: center;
+			color: #FFFFFF;
+			text-align:center;
+		}
+		#openPanelBtn{
+			bottom: 75vh;
+			transform:translateY(50%);
+		}
+		}
 		
+		#openPanelBtn{
+			background-color: rgba(0, 0, 0, 0.6);
+			position: absolute;
+			width: 40px;
+			height: 40px;
+			line-height:40px;
+			bottom: 75vh;
+			left:0px;
+			border-radius: 99em;
+			z-index:5;  
+		}
 		
 		.flow-yscroll{
 			left: 50%;
@@ -71,7 +115,7 @@
 			function loadMapScenario() {
 				map = new Microsoft.Maps.Map(document.getElementById('myMap'), {center: new Microsoft.Maps.Location(23.725, 121),
                     zoom: 8, showDashboard: false});
-							
+						
 			}
 		
 			function search_onlick() {
@@ -115,21 +159,42 @@
 				});
 			}
 
+			var num = 1;
+			var add;
 			function drawPath(){
-				//for(var i=0; i<2; i++){
-				//	var path = '{{geocode[i]}}';
-				//	alert(path);
 
-				//}
+				var c = document.getElementById('popView').childNodes[num];
+				c.style.color = "red";
+				
 
 				var path = {{ geocode|tojson }};
-				alert(path);
-				/*var path = '{{ geocode }}';
-				alert(path);
-				for(var i=0; i<path.length; i++){
-			        alert(path[i][0]);
-				}*/
+				add = {{ address|tojson}};
+				//var points = path.split(',');
+				//alert(path.length);
+				clearAllPin();
+				for(var i=0;i<num && i<path.length-2;i++){
+					//pushPin(path[i][0],path[i][1]);
+					if(i>0)
+						//clearRoute(dirMan);
+						searchRouteCode(add[i-1],add[i],path[i-1][0],path[i-1][1],path[i][0],path[i][1]);
+
+					clearAllPin();
+				}
+				num++;
+
 			}
+
+			function showPathNode(){
+				var path = {{ geocode|tojson }};
+				var addr = {{ address|tojson }};
+				var popView = document.getElementById('popView');
+
+				//alert(typeof(addr.length));
+				for(var i=0;i<addr.length;i++){
+					popView.innerHTML += "<p style='font-size:1.5em;'>"+addr[i]+"</p>";
+				}
+			}
+
 	</script>
 <<<<<<< HEAD
 	<script src="{{ url_for('static', filename='assets/js/mapControl.js') }}"></script>
@@ -153,15 +218,8 @@
 			<span>PaiYaCHu </span>
 		</a>
 		
-		<div class="input-group">
 			
-			<input type="search" class="form-control mx-1 my-1" placeholder="Search" aria-label="Search" id='search' style="background-color:rgba(255, 255, 255, 0.3); color: #FFF;">
-			<div class="input-group-append">
-				<button class="btn btn-secondary mx-1" type="submit" onclick="search_onlick()">search
-				<i class="fa fa-search"></i>
-				</button>
-			</div>
-		</div>
+			<button class="btn btn-secondary mx-1" type="submit" onclick="drawPath()">Next Spot</button>
 
 		
 
@@ -173,8 +231,8 @@
 				<li class="nav-item">
 					<a class="nav-link" href="/navigation">Navigation</a>
 				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">Trip</a>
+				<li class="nav-item font-weight-bold">
+					<a class="nav-link text-primary" href="#">Trip</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="/logout">logout</a>
@@ -184,11 +242,13 @@
 	</div>
 	</nav>
 	
+	<div id="openPanelBtn">
+		<p onclick="pop_onclick()" style="color: #FFFFFF; font-size: 40px; text-align: center; line-height: 40px;">↔</p>
+	</div>
 
 	<br>
 	<div id="popView">
-		<div id="setPanel" class="flow-yscroll"></div>
-		<div id="route_info" class="flow-yscroll" style="background-color:rgba(0, 0, 0, 0);"></div>
+
 	</div>
 	<br>
 	<div class="container bg-secondary">
@@ -206,5 +266,5 @@
 	</div>
 	<div id='myMap' class="border border-primary border-2"></div>
 </body>
-
+<script>showPathNode()</script>
 </html>

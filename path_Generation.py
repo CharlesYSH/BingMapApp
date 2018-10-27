@@ -80,7 +80,7 @@ def load_data():
     #y_test = y[int(0.9*len(dataset)):].reshape(-1,1,places_num)
     
     fn.close()
-    return x_train,y_train,places_num,points
+    return x_train,y_train,places_num,points,places
 
 def getDistance(latA, lonA, latB, lonB):
     if latA == latB and lonA == lonB:
@@ -200,7 +200,7 @@ def path_Generation(train=False,length=5,position=[24.8002,120.9795],top_n=10,ep
     #length=10
     #prime=[0] 24.80982,120.975139
     #top_n=5
-    x_train,y_train,places_num,points = load_data()
+    x_train,y_train,places_num,points,places = load_data()
     if train:
         embed_size = 512 
         #x_train,y_train,x_test,y_test,places_num = load_data(length=5)
@@ -222,12 +222,15 @@ def path_Generation(train=False,length=5,position=[24.8002,120.9795],top_n=10,ep
 
         path,rest_list = generate(model=model,prime=[[prime]], places_num=places_num, length=length, top_n=top_n, rest_type_flag=rest_type_flag, insert_flag=insert_flag)
         ans = []
+        add = []
         for index in path:
             ans.append(points[index].tolist())
+            add.append(places[index][1])
         for i in range(len(insert_flag)):
             insert_index = insert_flag[i]
             ans.insert(insert_index+i,rest_list[i][2:4].tolist())
+            add.insert(insert_index+i,rest_list[i][1])
 
         K.clear_session()
-
-        return ans
+        print(add)
+        return ans,add
