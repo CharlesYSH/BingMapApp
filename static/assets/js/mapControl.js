@@ -4,7 +4,7 @@ function loadMapScenario() {
 	map = new Microsoft.Maps.Map(document.getElementById('myMap'), {center: new Microsoft.Maps.Location(23.725, 121),
 		zoom: 8, showDashboard: false});
 		
-	directionsManager = new Microsoft.Maps.Directions.DirectionsManager(map);
+	//directionsManager = new Microsoft.Maps.Directions.DirectionsManager(map);
 	Microsoft.Maps.Events.addHandler(map, 'dblclick', function (e) { handleArgs('mapClick', e); });
 	Microsoft.Maps.Events.addHandler(map, 'click', function (e) { handleArgs('mapClick', e); });
 }
