@@ -6,6 +6,7 @@ from flask import Flask, render_template, flash, request, redirect, url_for, ses
 from flask_session import Session
 from wtforms import Form, TextField, TextAreaField, validators, StringField, SubmitField
 import sqlite3
+import path_Generation as pg
 
 # App config.
 DEBUG = True
@@ -75,7 +76,8 @@ def profile():
 def trip():
 #    if not session.get('username'):
 #        return redirect(url_for('hello'))
-    return render_template('trip.html', form=Form)
+    path = pg.path_Generation()
+    return render_template('trip.html', geocode=path ,form=Form)
     
 @app.route('/logout')
 def logout():

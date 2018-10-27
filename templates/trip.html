@@ -71,14 +71,13 @@
 			function loadMapScenario() {
 				map = new Microsoft.Maps.Map(document.getElementById('myMap'), {center: new Microsoft.Maps.Location(23.725, 121),
                     zoom: 8, showDashboard: false});
-		
-				
+							
 			}
 		
 			function search_onlick() {
 				var searchStr = document.getElementById('search').value;
 				//alert('search String:'+document.getElementById('search').value);
-				
+				drawPath();
 				Microsoft.Maps.loadModule('Microsoft.Maps.Search', function () {
 				//alert(map.getBounds());
                     var searchManager = new Microsoft.Maps.Search.SearchManager(map);
@@ -115,8 +114,28 @@
 					directionsManager.showInputPanel('setPanel');
 				});
 			}
+
+			function drawPath(){
+				//for(var i=0; i<2; i++){
+				//	var path = '{{geocode[i]}}';
+				//	alert(path);
+
+				//}
+
+				var path = {{ geocode|tojson }};
+				alert(path);
+				/*var path = '{{ geocode }}';
+				alert(path);
+				for(var i=0; i<path.length; i++){
+			        alert(path[i][0]);
+				}*/
+			}
 	</script>
+<<<<<<< HEAD
 	<script src="{{ url_for('static', filename='assets/js/mapControl.js') }}"></script>
+=======
+	<!--script src="{{ url_for('static', filename='assets/js/mapControl.js') }}"></script-->
+>>>>>>> dadcea175b773313f797a87a66cdd6c325e84f3e
 </head>
 
 <body onload='loadMapScenario();'>
