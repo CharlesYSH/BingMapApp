@@ -71,7 +71,11 @@ def profile():
 #        return redirect(url_for('hello'))
     return render_template('about.html', form=Form)
     
-
+@app.route('/trip', methods=['GET', 'POST'])
+def trip():
+#    if not session.get('username'):
+#        return redirect(url_for('hello'))
+    return render_template('trip.html', form=Form)
     
 @app.route('/logout')
 def logout():

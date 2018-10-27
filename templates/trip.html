@@ -1,0 +1,190 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+
+<head>
+	<title>Note</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap-theme.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<meta name="viewport" content = "width=device-width, initial-scale=1.0">
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<script src="{{ url_for('static', filename='assets/js/mapControl.js') }}"></script>
+	<style>
+		html{
+			padding: 0;  
+			margin: 0;
+			height: 100%;
+			height: 100%;  
+		}
+		body{
+			background-image: linear-gradient(to top, #fff1eb 0%, #ace0f9 100%);
+			padding: 0;  
+			margin: 0;
+			height: 100%;
+			height: 100%;  
+			//overflow:hidden;
+			background-repeat: no-repeat;
+			background-attachment: fixed;
+		}
+		
+		#myMap{
+			width: 100vw;
+			height: 100vh;
+			left: 0;
+			top: 0;
+			position: absolute;
+			//top:50%;
+			//left:50%;
+			//transform:translateX(-50%);
+		}
+		
+		
+		#popView{
+			height: 90vh;
+			width: 375px;
+			border-radius:0 10px 0 0;
+			background-color: rgba(0, 0, 0, 0.6);
+			bottom: 0px;
+			position:absolute;
+			z-index:2;
+			left:-390px;
+			text-align: center;
+			color: #FFFFFF;
+			text-align:center; 
+		}
+		
+		
+		.flow-yscroll{
+			left: 50%;
+			height: 50%;
+			overflow-y: auto;
+			overflow-x: hidden;
+		}
+
+	</style>
+	<meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
+	<script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?key=Au2cuQcPQsyaiiJ9utw5Sr5zs1cCSkdo19Dfs83neF7c3YUHdGePUJUDop-edg6L'></script>
+	<script type='text/javascript'>
+			var map;
+			
+			function loadMapScenario() {
+				map = new Microsoft.Maps.Map(document.getElementById('myMap'), {center: new Microsoft.Maps.Location(23.725, 121),
+                    zoom: 8, showDashboard: false});
+		
+				
+			}
+		
+			function search_onlick() {
+				var searchStr = document.getElementById('search').value;
+				//alert('search String:'+document.getElementById('search').value);
+				
+				Microsoft.Maps.loadModule('Microsoft.Maps.Search', function () {
+				//alert(map.getBounds());
+                    var searchManager = new Microsoft.Maps.Search.SearchManager(map);
+                    var requestOptions = {
+                        bounds: map.getBounds(),
+                        where: searchStr,
+                        callback: function (answer, userData) {
+							
+                            map.setView({ bounds: answer.results[0].bestView });
+                            map.entities.push(new Microsoft.Maps.Pushpin(answer.results[0].location));
+                        }
+                    };
+                    searchManager.geocode(requestOptions);
+                });
+			}
+			
+			var isHiden = true;
+			function pop_onclick() {
+				
+				if(isHiden){
+					document.getElementById('popView').style.left = '0px';
+					navigationCal();
+				}else{
+					document.getElementById('popView').style.left = '-390px';
+				}
+				isHiden = !isHiden;
+			}
+			
+			
+			function navigationCal(){
+				Microsoft.Maps.loadModule('Microsoft.Maps.Directions', function () {
+					var directionsManager = new Microsoft.Maps.Directions.DirectionsManager(map);
+					directionsManager.setRenderOptions({ itineraryContainer: document.getElementById('route_info') });
+					directionsManager.showInputPanel('setPanel');
+				});
+			}
+	</script>
+</head>
+
+<body onload='loadMapScenario();'>
+	
+	<nav class="navbar fixed-top navbar-expand-lg navbar-dark " style="background-color:rgba(0, 0, 0, 0.6);">
+	<div class="container">
+	<!-- Navbar content -->
+		<!-- .navbar-toggler 漢堡式選單按鈕 -->
+			<button class="navbar-toggler mx-1 " type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+		<a class="navbar-brand mx-auto" href="/">
+			<img src="{{ url_for('static', filename='images/icon01.png') }}" width="30" height="30" class="d-inline-block align-top" alt="">
+			<span>PaiYaCHu </span>
+		</a>
+		
+		<div class="input-group">
+			
+			<input type="search" class="form-control mx-1 my-1" placeholder="Search" aria-label="Search" id='search' style="background-color:rgba(255, 255, 255, 0.3); color: #FFF;">
+			<div class="input-group-append">
+				<button class="btn btn-secondary mx-1" type="submit" onclick="search_onlick()">search
+				<i class="fa fa-search"></i>
+				</button>
+			</div>
+		</div>
+
+		
+
+		<div class="collapse navbar-collapse" id="navbarToggleExternalContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item">
+					<a class="nav-link" href="/about">About</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/navigation">Navigation</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">Trip</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/logout">logout</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	</nav>
+	
+
+	<br>
+	<div id="popView">
+		<div id="setPanel" class="flow-yscroll"></div>
+		<div id="route_info" class="flow-yscroll" style="background-color:rgba(0, 0, 0, 0);"></div>
+	</div>
+	<br>
+	<div class="container bg-secondary">
+		<!---<div class="card" style="width: 18rem;">
+			<img class="card-img-top" src="..." alt="Card image cap">
+			<div class="card-body">
+				<h5 class="card-title">Card title</h5>
+				<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+				<a href="#" class="btn btn-primary">Go somewhere</a>
+			</div>
+		</div>
+		<div id='printoutPanel'></div>-->
+        
+        
+	</div>
+	<div id='myMap' class="border border-primary border-2"></div>
+</body>
+
+</html>
