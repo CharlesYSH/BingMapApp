@@ -55,20 +55,20 @@ def favicon():
 
 @app.route("/", methods=['GET', 'POST'])
 def search():
-    if not session.get('username'):
-        return redirect(url_for('hello'))
+#    if not session.get('username'):
+#        return redirect(url_for('hello'))
     return render_template('search.html', form=Form)
 
 @app.route('/navigation', methods=['GET', 'POST'])
 def navigation():
-    if not session.get('username'):
-        return redirect(url_for('hello'))
+#    if not session.get('username'):
+#        return redirect(url_for('hello'))
     return render_template('navigation.html', form=Form)
 
 @app.route('/about', methods=['GET', 'POST'])
 def profile():
-    if not session.get('username'):
-        return redirect(url_for('hello'))
+#    if not session.get('username'):
+#        return redirect(url_for('hello'))
     return render_template('about.html', form=Form)
     
 
