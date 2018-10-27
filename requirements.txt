@@ -1,0 +1,5 @@
+flask
+wtforms
+flask-session
+oauth2client
+google-api-python-client
