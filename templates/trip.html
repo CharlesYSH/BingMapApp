@@ -9,7 +9,7 @@
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-	<script src="{{ url_for('static', filename='assets/js/mapControl.js') }}"></script>
+	
 	<style>
 		html{
 			padding: 0;  
@@ -71,14 +71,13 @@
 			function loadMapScenario() {
 				map = new Microsoft.Maps.Map(document.getElementById('myMap'), {center: new Microsoft.Maps.Location(23.725, 121),
                     zoom: 8, showDashboard: false});
-		
-				
+							
 			}
 		
 			function search_onlick() {
 				var searchStr = document.getElementById('search').value;
 				//alert('search String:'+document.getElementById('search').value);
-				
+				drawPath();
 				Microsoft.Maps.loadModule('Microsoft.Maps.Search', function () {
 				//alert(map.getBounds());
                     var searchManager = new Microsoft.Maps.Search.SearchManager(map);
@@ -115,7 +114,24 @@
 					directionsManager.showInputPanel('setPanel');
 				});
 			}
+
+			function drawPath(){
+				//for(var i=0; i<2; i++){
+				//	var path = '{{geocode[i]}}';
+				//	alert(path);
+
+				//}
+
+				var path = {{ geocode|tojson }};
+				alert(path);
+				/*var path = '{{ geocode }}';
+				alert(path);
+				for(var i=0; i<path.length; i++){
+			        alert(path[i][0]);
+				}*/
+			}
 	</script>
+	<!--script src="{{ url_for('static', filename='assets/js/mapControl.js') }}"></script-->
 </head>
 
 <body onload='loadMapScenario();'>
