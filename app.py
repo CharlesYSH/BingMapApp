@@ -19,12 +19,7 @@ sess.init_app(app)
 
 class ReusableForm(Form):
     name = TextField('Name:', validators=[validators.required()])
-    password = TextField('Password:', validators=[validators.required(), validators.Length(min=3, max=35)])
- 
-@app.route("/", methods=['GET', 'POST'])
-def index():
-    return render_template('search.html', form=Form)
-    
+    password = TextField('Password:', validators=[validators.required(), validators.Length(min=3, max=35)])  
  
 @app.route("/login", methods=['GET', 'POST'])
 def hello():
@@ -46,29 +41,37 @@ def hello():
             if(c.execute(sqlCMD).fetchall()):
                 flash('Nice to meet you back.')
                 session['username'] = name
-                return redirect(url_for('dashboard'))
+                return redirect(url_for('search'))
             else:
                 flash('Error: The name or password you’ve entered is incorrect.')
         else:
             flash('Error: All the form fields are required. ')
-            
+        
     return render_template('hello.html', form=form)
 
 @app.route('/favicon.ico')
 def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static'), 'favicon.ico', mimetype='image/vnd.microsoft.icon')
-    
-@app.route('/dashboard', methods=['GET', 'POST'])
-def dashboard():
+
+@app.route("/", methods=['GET', 'POST'])
+def search():
     if not session.get('username'):
         return redirect(url_for('hello'))
-    return render_template('dashboard.html', form=Form)
+    return render_template('search.html', form=Form)
 
 @app.route('/navigation', methods=['GET', 'POST'])
 def navigation():
     if not session.get('username'):
         return redirect(url_for('hello'))
     return render_template('navigation.html', form=Form)
+
+@app.route('/about', methods=['GET', 'POST'])
+def profile():
+    if not session.get('username'):
+        return redirect(url_for('hello'))
+    return render_template('about.html', form=Form)
+    
+
     
 @app.route('/logout')
 def logout():

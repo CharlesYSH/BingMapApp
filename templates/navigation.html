@@ -41,7 +41,7 @@
 		
 		#popView{
 			height: 88vh;
-			width: 370px;
+			width: 380px;
 			border-radius:10px 10px 0 0;
 			background-color: rgba(0, 0, 0, 0.6);
 			bottom: 0px;
@@ -166,15 +166,15 @@
 			<span class="navbar-toggler-icon"></span>
 		</button>
 
-		<a class="navbar-brand mx-auto" href="#">
-			<img src="img/icon01.png" width="30" height="30" class="d-inline-block align-top" alt="">
+		<a class="navbar-brand mx-auto" href="/">
+			<img src="{{ url_for('static', filename='images/icon01.png') }}" width="30" height="30" class="d-inline-block align-top" alt="">
 			<span>PaiYaCHu</span>
 		</a>
 
 		<div class="collapse navbar-collapse" id="navbarToggleExternalContent">
 			<ul class="navbar-nav mx-auto">
 				<li class="nav-item">
-					<a class="nav-link" href="#">About</a>
+					<a class="nav-link" href="/about">About</a>
 				</li>
 				<li class="nav-item font-weight-bold">
 					<a class="nav-link text-primary" href="#">Navigation</a>
@@ -188,13 +188,12 @@
 			</ul>
 		</div>
 
-		<div id="openPanelBtn">
-			<p onclick="pop_onclick()" style="color: #FFFFFF; font-size: 45px; text-align: center; line-height: 25px;">⌂</p>
-		</div>
-
-
 	</div>
 	</nav>
+		
+	<div id="openPanelBtn">
+		<p onclick="pop_onclick()" style="color: #FFFFFF; font-size: 45px; text-align: center; line-height: 25px;">⌂</p>
+	</div>
 
 	<br>
 	<div id="popView" style="padding:10px 4px 0px 4px;">

@@ -124,8 +124,8 @@
 	<!-- Navbar content -->
 		
 
-		<a class="navbar-brand mx-auto" href="#">
-			<img src="img/icon01.png" width="30" height="30" class="d-inline-block align-top" alt="">
+		<a class="navbar-brand mx-auto" href="/">
+			<img src="{{ url_for('static', filename='images/icon01.png') }}" width="30" height="30" class="d-inline-block align-top" alt="">
 			<span>PaiYaCHu </span>
 		</a>
 		
@@ -134,7 +134,7 @@
 			<button class="navbar-toggler mx-1" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-			<input type="search" class="form-control" placeholder="Search" aria-label="Search" id='search' style="background-color:rgba(255, 255, 255, 0.3); color: #FFF;">
+			<input type="search" class="form-control mx-1" placeholder="Search" aria-label="Search" id='search' style="background-color:rgba(255, 255, 255, 0.3); color: #FFF;">
 			<div class="input-group-append">
 				<button class="btn btn-secondary mx-1" type="submit" onclick="search_onlick()">search
 				<i class="fa fa-search"></i>
@@ -147,7 +147,7 @@
 		<div class="collapse navbar-collapse" id="navbarToggleExternalContent">
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item">
-					<a class="nav-link" href="#">About</a>
+					<a class="nav-link" href="/about">About</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="/navigation">Navigation</a>
