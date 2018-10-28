@@ -1,6 +1,6 @@
 新竹 X 梅竹黑客松 - 微軟
 ========================
-[![Build Status](https://secure.travis-ci.org/thoughtbot/capybara-webkit.svg?branch=master)](https://travis-ci.org/thoughtbot/capybara-webkit)
+
 BingMapApp
 
 PaiYaCHu
