@@ -105,7 +105,7 @@ def paper():
             length += 3
             count_rest = 2
             insert_flag.append(2)
-            insert_flag.append(4)
+            insert_flag.append(3)
         else :
             length += 2
             count_rest = 1

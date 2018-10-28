@@ -232,5 +232,5 @@ def path_Generation(train=False,length=5,position=[24.8002,120.9795],top_n=10,ep
             add.insert(insert_index+i,rest_list[i][1])
 
         K.clear_session()
-        print(add)
+        print(rest_list)
         return ans,add
