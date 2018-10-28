@@ -21,10 +21,10 @@
 			<nav class="navbar fixed-top navbar-expand-lg navbar-dark " style="background-color:rgba(0, 0, 0, 0.6);">
 				<div class="container">
 				<!-- Navbar content -->
-					<!-- .navbar-toggler 漢堡式選單按鈕 -->
+					<!-- .navbar-toggler 漢堡式選單按鈕 
 					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
 						<span class="navbar-toggler-icon"></span>
-					</button>
+					</button> -->
 
 					<a class="navbar-brand mx-auto" href="/">
 						<img src="{{ url_for('static', filename='images/icon01.png') }}" width="30" height="30" class="d-inline-block align-top" alt="">
@@ -33,14 +33,14 @@
 
 					<div class="collapse navbar-collapse" id="navbarToggleExternalContent">
 						<ul class="navbar-nav mx-auto">
-							<li class="nav-item">
-								<a class="nav-link" href="/about">About</a>
-							</li>
 							<li class="nav-item font-weight-bold">
-								<a class="nav-link text-primary" href="#">Navigation</a>
+								<a class="nav-link text-primary" href="/about">About</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="#">Trip</a>
+								<a class="nav-link" href="/navigation">Navigation</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="/paper">Trip</a>
 							</li>
 							<li class="nav-item">
 								<a class="nav-link" href="/logout">logout</a>
@@ -52,23 +52,12 @@
 			</nav>
 
 		<!-- Three -->
-			<section id="three" class="wrapper">
-				<div class="inner">
-					<header class="align-center">
-						<h2>Lazy Trip</h2>
-						<p>Design Your Own Trip </p>
-					</header>
-					<p>你曾經為了規劃旅行而感到煩惱嗎?</p>
-					<p>現在Lazy Trip可以幫助你快速規劃行程。</p>
-					<p>只要選擇幾個選項，你就可以簡單設基出屬於自己的行程! </p>
-				</div>
-			</section>
-
+			<br>
 			<section id="two" class="wrapper style1 special">
 				<div class="inner" >
 					<header>
-						<h2>PaiYaChu</h2>
-						<p>Members</p>
+						<h2>Members</h2>
+						<p>About</p>
 					</header>
 					<div class="flex flex-4">
 						<div class="box person">
@@ -90,14 +79,14 @@
 								<img src="{{ url_for('static', filename='images/pic05.jpg') }}" alt="Person 3" />
 							</div>
 							<h3>黃聖哲</h3>
-							<p>Data base Construct</p>
+							<p>Web UI Design</p>
 						</div>
 						<div class="box person">
 							<div class="image round">
 								<img src="{{ url_for('static', filename='images/pic06.jpg') }}" alt="Person 4" />
 							</div>
 							<h3>白立杰</h3>
-							<p>App Develop</p>
+							<p>Web Design</p>
 						</div>
 					</div>
 				</div>

@@ -17,6 +17,9 @@ app.config['SESSION_TYPE'] = 'filesystem'
 sess = Session()
 sess.init_app(app)
 
+rest_type_flag = []
+insert_flag = []
+length = 0
 
 class ReusableForm(Form):
     name = TextField('Name:', validators=[validators.required()])
@@ -76,8 +79,62 @@ def profile():
 def trip():
 #    if not session.get('username'):
 #        return redirect(url_for('hello'))
-    path,address = pg.path_Generation()
+    path,address = pg.path_Generation(length=length,rest_type_flag=rest_type_flag,insert_flag=insert_flag)
     return render_template('trip.html', geocode=path, address=address,form=Form)
+
+@app.route('/paper', methods=['GET', 'POST'])
+def paper():
+    form = request.form
+
+
+    if request.method == 'POST':
+        global length,rest_type_flag,insert_flag
+        count_rest = 0
+        style = 0
+        length = 0
+        rest_type_flag = []
+        insert_flag = []
+        if request.form['age']=='option1' :
+            length += 2
+        else :
+            length += 1
+
+        #if request.form['place']== :
+
+        if request.form['how_long']=='option3' :
+            length += 3
+            count_rest = 2
+            insert_flag.append(2)
+            insert_flag.append(4)
+        else :
+            length += 2
+            count_rest = 1
+            if request.form['depart_time']=='option2' :
+                insert_flag.append(1)
+            else :
+                insert_flag.append(2)
+
+
+        if request.form['food']=='option1' :
+            style = 0
+        elif request.form['food']=='option2' :
+            style = 1
+        elif request.form['food']=='option3' :
+            style = 2
+        elif request.form['food']=='option4' :
+            style = 3
+        elif request.form['food']=='option5' :
+            style = 4
+        elif request.form['food']=='option6' :
+            style = 5
+        for i in range(count_rest):
+            rest_type_flag.append(style)
+
+        return redirect(url_for('trip'))
+        #print('length:',length)
+        #print('rest_type_flag',rest_type_flag)
+        #print('insert_flag',insert_flag)
+    return render_template('paper.html', form=Form)
     
 @app.route('/logout')
 def logout():

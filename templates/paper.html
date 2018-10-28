@@ -1,0 +1,243 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+
+<head>
+	<title>Trip</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap-theme.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<meta name="viewport" content = "width=device-width, initial-scale=1.0">
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	
+	
+	<style>
+		@import url(https://fonts.googleapis.com/earlyaccess/notosanstc.css);
+		
+		html{
+			padding: 0;  
+			margin: 0;
+			height: 100%;
+			width: 100%;  
+		}
+		body{
+			background-image: linear-gradient(to top, #fff1eb 0%, #ace0f9 100%);
+			padding: 0;  
+			margin: 0;
+			height: 100%;
+			width: 100%;  
+			//overflow:hidden;
+			background-repeat: no-repeat;
+			background-attachment: fixed;
+		}
+		
+		
+	</style>
+	<meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
+	<script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?key=Au2cuQcPQsyaiiJ9utw5Sr5zs1cCSkdo19Dfs83neF7c3YUHdGePUJUDop-edg6L'></script>
+	<script type='text/javascript'></script>
+</head>
+
+<body onload='loadMapScenario();'>
+	
+	<nav class="navbar fixed-top navbar-expand-lg navbar-dark " style="background-color:rgba(0, 0, 0, 0.6);">
+	<div class="container">
+	<!-- Navbar content -->
+		<!-- .navbar-toggler 漢堡式選單按鈕 -->
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<a class="navbar-brand mx-auto" href="/">
+			<img src="{{ url_for('static', filename='images/icon01.png') }}" width="30" height="30" class="d-inline-block align-top" alt="">
+			<span>PaiYaCHu </span>
+		</a>
+		
+		
+		<div class="collapse navbar-collapse" id="navbarToggleExternalContent">
+			<ul class="navbar-nav mx-auto">
+				<li class="nav-item">
+					<a class="nav-link" href="/about">About</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/navigation">Navigation</a>
+				</li>
+				<li class="nav-item font-weight-bold">
+					<a class="nav-link text-primary" href="/paper">Trip</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/logout">logout</a>
+				</li>
+			</ul>
+		</div>
+
+	</div>
+	</nav>
+		<br><br><br><br>
+		<form  action="" method="post" role="form">
+		<font face="Noto Sans TC">	
+			<section class="container" style="text-align: center">
+				<div class="row active-with-click">
+				
+					<div class="col-md-4 col-sm-6 col-xs-12">
+						<article class="material-card Red">
+						<h2>
+							<span>年齡層</span>  
+						</h2>
+						<div class="mc-content">
+
+							<div class="btn-group btn-group-toggle" data-toggle="buttons">
+								<label class="btn btn-secondary active">
+									<input type="radio" name="age" value="option1" autocomplete="off" checked> 年輕人
+								</label>
+								<label class="btn btn-secondary ">
+									<input type="radio" name="age" value="option2" autocomplete="off"> 中年人
+								</label>
+								<label class="btn btn-secondary ">
+									<input type="radio" name="age" value="option3" autocomplete="off"> 年長者
+								</label>
+							</div>	
+						</div>
+						</article>
+						<br>
+					</div>
+					
+					<div class="col-md-4 col-sm-6 col-xs-12">
+						<article class="material-card Pink">
+						<h2>
+							<span>旅遊場所</span>
+						</h2>
+						<div class="mc-content">
+		
+							<div class="btn-group btn-group-toggle" data-toggle="buttons">
+								<label class="btn btn-secondary active">
+									<input type="radio" name="place" value="option1" autocomplete="off" checked> 室外
+								</label>
+								<label class="btn btn-secondary">
+									<input type="radio" name="place" value="option2" autocomplete="off"> 室內
+								</label>
+							</div>	
+						</div>
+						<br>
+						</article>
+					</div>
+
+					<div class="col-md-4 col-sm-6 col-xs-12">
+						<article class="material-card Purple">
+						<h2>
+							<span>旅遊所花費的時間</span>
+						</h2>
+						<div class="mc-content">
+			
+							<div class="btn-group btn-group-toggle" data-toggle="buttons">
+								<label class="btn btn-secondary active">
+									<input type="radio" name="how_long" value="option1" autocomplete="off" checked> 附近
+								</label>
+								<label class="btn btn-secondary">
+									<input type="radio" name="how_long" value="option2" autocomplete="off"> 半天
+								</label>
+								<label class="btn btn-secondary">
+									<input type="radio" name="how_long" value="option3" autocomplete="off"> 整天
+								</label>
+							</div>	
+						</div>
+						<br>
+						</article>
+					</div>	
+					
+					<div class="col-md-4 col-sm-6 col-xs-12">
+						<article class="material-card Indigo">
+						<h2>
+							<span>出發時間</span>
+						</h2>
+						<div class="mc-content">		
+							
+							<div class="btn-group btn-group-toggle" data-toggle="buttons">
+								<label class="btn btn-secondary active">
+									<input type="radio" name="depart_time" value="option1" autocomplete="off" checked> 早上8點
+								</label>
+								<label class="btn btn-secondary">
+									<input type="radio" name="depart_time" value="option2" autocomplete="off"> 早上10點
+								</label>
+								<label class="btn btn-secondary">
+									<input type="radio" name="depart_time" value="option3" autocomplete="off"> 下午1點
+								</label>
+							</div>	
+						</div>
+						<br>
+						</article>
+					</div>
+	
+					<div class="col-md-4 col-sm-6 col-xs-12">
+						<article class="material-card Deep-Purple">
+						<h2>
+							<span>餐廳選擇</span>
+						</h2>
+						<div class="mc-content">	
+							<div class="btn-group-vertical btn-group-toggle" data-toggle="buttons">	
+								
+								<div class="btn-group btn-group-toggle">
+									<label class="btn btn-secondary active">
+										<input type="radio" name="food" value="option1" autocomplete="off" checked> 牛排
+									</label>
+									<label class="btn btn-secondary">
+										<input type="radio" name="food" value="option2" autocomplete="off"> 日式料理
+									</label>
+									<label class="btn btn-secondary">
+										<input type="radio" name="food" value="option3" autocomplete="off"> 義式料理
+									</label>
+								</div>
+								
+								<div class="btn-group btn-group-toggle">
+									<label class="btn btn-secondary">
+										<input type="radio" name="food" value="option4" autocomplete="off"> 中式料理
+									</label>
+									<label class="btn btn-secondary">
+										<input type="radio" name="food" value="option5" autocomplete="off"> 咖啡廳
+									</label>
+									<label class="btn btn-secondary">
+										<input type="radio" name="food" value="option6" autocomplete="off"> 燒烤
+									</label>
+								</div>
+							</div>
+						</div>
+						<br>
+						</article>
+					</div>
+
+				</div>
+			</section>
+		<div class="container my-5">
+			<div class="row text-center">
+				<div class="col-md-4 offset-md-5 col-lg-2">
+					<button type="submit" class="btn btn-primary  btn-block">提交</button>
+				</div>
+			</div>
+		</div>
+		</form>
+		
+		
+<!--		
+		<div class="container-fluid">
+			<div class="row">
+
+				<div class="row text-center">
+					<button type="submit" class="btn btn-primary submit">Submit</button>
+				</div>
+				
+			</div>
+		</div>
+		
+		
+-->		
+		
+		
+		
+		
+		
+		<br><br>
+
+</body>
+</html>
