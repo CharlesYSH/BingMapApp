@@ -20,11 +20,12 @@ function handleArgs(id, e) {
 }
 
 
-
+var dirMan;
 function searchRouteCode(loc1, loc2, lat1,log1,lat2,log2){
 	//var directionsManager;
 	Microsoft.Maps.loadModule('Microsoft.Maps.Directions', function () {
 	    var directionsManager = new Microsoft.Maps.Directions.DirectionsManager(map);
+		dirMan = directionsManager ;
 	    // Set Route Mode to driving
 	    directionsManager.setRequestOptions({ routeMode: Microsoft.Maps.Directions.RouteMode.walking });
 	    var waypoint1 = new Microsoft.Maps.Directions.Waypoint({ address:loc1, location: new Microsoft.Maps.Location(lat1, log1) });
@@ -39,9 +40,9 @@ function searchRouteCode(loc1, loc2, lat1,log1,lat2,log2){
 }
 
 
-function clearRoute(directionsManager){
+function clearRoute(){
 	Microsoft.Maps.loadModule('Microsoft.Maps.Directions', function () {
-		directionsManager.clearAll();
+		 dirMan.clearAll();
 	});
 }
 
