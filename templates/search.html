@@ -126,14 +126,21 @@
 				});
 			}
 		
-			var viewRoad = true;
+			var viewFlag = 0;
 			function changeViewMode(){
-				if(viewRoad){
+				if(viewFlag == 0){
 					setMapAerial();
-				}else{
+				}else if(viewFlag == 1){
 					setMapRoad();
+					showTraffic();
+				}else if(viewFlag == 2){
+					setMapRoad();
+					hideTraffic();
 				}
-				viewRoad = !viewRoad;
+				viewFlag++;
+				if(viewFlag >2){
+					viewFlag = 0;
+				}
 			}
 	</script>
 	<script src="{{ url_for('static', filename='assets/js/mapControl.js') }}"></script>
