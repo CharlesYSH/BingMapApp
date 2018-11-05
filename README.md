@@ -5,7 +5,7 @@ BingMapApp
 
 PaiYaCHu
 -----------------------
-- Our Site : http://find.nctu.me:5000
+- Our Site : http://find.nctu
   
 ![image](https://github.com/CharlesYSH/BingMapApp/blob/master/demo1.jpg?raw=true)
 
